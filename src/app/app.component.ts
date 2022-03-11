@@ -8,11 +8,13 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'byteBank_two';
 
-  transferencia: any;
+  transferencias: any[] = [];
 
   transferir($event) {
     console.log($event);
+    const transferencia = {...$event, data: new Date()} // passa para dentro de transferência somente as propriedades internas
+    console.log(transferencia)
 
-    this.transferencia = $event;
+    this.transferencias.push(transferencia);
   }
 }

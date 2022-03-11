@@ -5,7 +5,7 @@
     <th class="tabela__cabecalho__conteudo">Destino</th>
   </thead>
 
-  <tbody> <!-- Corpo -->
+  <tbody *ngIf="transferencias.length > 0; else listaVazia"> <!-- Corpo -->
     <tr class="tabela_linha" *ngFor="let transferencia of transferencias"> <!-- Cada linha da tabela -->
       <!-- Interpolando valor -->
       <td class="tabela__conteudo">{{transferencia?.data | date: 'short'}}</td> <!-- Foi utilizado formatação de data do angular "date pipe" -->
@@ -15,3 +15,6 @@
   </tbody>
 </table>
 
+<ng-template #listaVazia>
+  <p>Nenhuma transferência cadastrada</p>
+</ng-template>

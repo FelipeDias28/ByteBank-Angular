@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Transferencia } from './../models/transferencia.model';
 import { TransferenciaService } from './../services/transferencia.service';
 
 @Component({
@@ -18,7 +19,10 @@ export class ExtratoComponent implements OnInit {
     // Quando o componente extrato é inicializado
     // esta pegando as informações do get de transferência
     //e passando para a variável local.
-    this.transferencias = this.service.transferencias;
+    this.service.todasTransferencias().subscribe((transferencias: Transferencia[]) => {
+      console.table(transferencias);
+      this.transferencias = transferencias;
+    })
   }
 
 }

@@ -13,9 +13,4 @@ export class AppComponent {
   constructor(private service: TransferenciaService) {
 
   }
-
-  transferir($event) {
-    // utilizando a instância criada no service
-    this.service.adicionarTransferencia($event);
-  }
 }

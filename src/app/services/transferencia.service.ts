@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Transferencia } from '../models/transferencia.model';
 
 @Injectable({
@@ -9,26 +10,26 @@ export class TransferenciaService {
   private listaTransferencia: any[];
   private url = "http://localhost:3000/transferencias";
 
-constructor(private httpClient: HttpClient) {
-  this.listaTransferencia = [];
-}
+  constructor(private httpClient: HttpClient) {
+    this.listaTransferencia = [];
+  }
 
-get transferencias() {
-  return this.listaTransferencia;
-}
+  get transferencias() {
+    return this.listaTransferencia;
+  }
 
-todasTransferencias() {
-  return this.httpClient.get<Transferencia[]>(this.url);
-}
+  todasTransferencias() {
+    return this.httpClient.get<Transferencia[]>(this.url);
+  }
 
-adicionarTransferencia(transferencia:any) {
-  this.hidratar(transferencia);
-  this.transferencias.push(transferencia);
-}
+  adicionarTransferencia(transferencia:any): Observable<Transferencia> {
+    this.hidratar(transferencia);
 
-private hidratar(transferencia: any) {
-  // Onde poderia colocar as regras de negocio
-  transferencia.data = new Date;
-}
+    return this.httpClient.post<Transferencia>(this.url, transferencia);
+  }
 
+  private hidratar(transferencia: any) {
+    // Onde poderia colocar as regras de negocio
+    transferencia.data = new Date;
+  }
 }
